@@ -9,10 +9,14 @@ let s:count = 0
 
 
 fun! todo#countF()
-	redir => cnt
-	silent exe '%s/' . s:remind . '//n'
-	redir END
-	let s:count = matchstr( cnt, '\d\+' )
+	try
+		redir => cnt
+		silent exe '%s/' . s:remind . '//n'
+		redir END
+		let s:count = matchstr( cnt, '\d\+' )
+	catch /.*/
+		return 0
+	endtry
 endf
 
 function! s:Filecount()
