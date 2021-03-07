@@ -27,6 +27,6 @@ function! todo#listtask() abort
     return printf("%s[%d]", s:remind, n)
 endfunction
 
-:autocmd TextChanged,InsertLeave *.c call todo#countF()
+:autocmd TextChanged,InsertLeave * call todo#countF()
 
 "map <leader>t :exec "NERDTree " . s:todo_directory<cr>
