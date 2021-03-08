@@ -10,12 +10,9 @@ let s:count = 0
 
 fun! todo#countF()
 	try
-		redir => cnt
-		silent exe '%s/' . s:remind . '//n'
-		redir END
-		let s:count = matchstr( cnt, '\d\+' )
+		let s:count = substitute(system("cat " . bufname("%") . " | grep " . s:remind . " | wc -l"), '\n', '', 'g')
 	catch /.*/
-		return 0
+		let s:count = 0
 	endtry
 endf
 
